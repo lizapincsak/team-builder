@@ -1,27 +1,23 @@
 import React from 'react';
 
-const TeamForm = props => {
-
-    const { values, update, submit } = props;
-
-    const onChange = evt => {
+function TeamForm ({ values, update, add }) {
+    const change = (evt) => {
         const {name, value} = evt.target;
         update(name, value);
     };
 
-    const onSubmit = evt => {
+    const submit = (evt) => {
         evt.preventDefault();
-        submit();
-    }
+        add();
+    };
     return(
-        <form onSubmit={onSubmit}>
-        <div>
+        <form onSubmit={submit}>
           <label>Name
             <input
             name="name"
             type="text"
             value={values.name}
-            onChange={onChange}
+            onChange={change}
             maxLength="30"
             placeholder="Type a name..."
             />
@@ -31,7 +27,7 @@ const TeamForm = props => {
             name="email"
             type="email"
             value={values.email}
-            onChange={onChange}
+            onChange={change}
             maxLength="30"
             placeholder="Type an email..."
             />
@@ -40,17 +36,16 @@ const TeamForm = props => {
             <select 
             name="role"
             value={values.role}
-            onChange={onChange}>
+            onChange={change}>
             <option value="">-----select role-----</option>
-            <option value="">Goalie</option>
-            <option value="">Defender</option>
-            <option value="">Midfielder</option>
-            <option value="">Forward</option>
+            <option value="Goalie">Goalie</option>
+            <option value="Defender">Defender</option>
+            <option value="Midfielder">Midfielder</option>
+            <option value="Forward">Forward</option>
             </select>
         </label>
         <div>
-          <button className="submit">submit</button>
-        </div>
+          <button>add</button>
         </div>
       </form>
 

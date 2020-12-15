@@ -1,7 +1,7 @@
 import './App.css';
 import React, { useState } from 'react';
 import TeamForm from './components/TeamForm';
-import Team from './components/Team';
+// import Team from './components/Team';
 
 // const teamMembers = [
 //   {name: 'Jamie Tartt', email: 'l@w.com', role: 'forward'},
@@ -9,7 +9,7 @@ import Team from './components/Team';
 //   {name: 'Ted Lasso', email: 'p@w.com', role: 'coach'},
 // ]
 
-const intialTeamValues = {
+const emptyForm = {
   names: "",
   email: "",
   role: "",
@@ -17,11 +17,11 @@ const intialTeamValues = {
 
 function App() {
 const [team, setTeam] = useState([]);
-const [formValues, setFormValues] = useState(intialTeamValues);
+const [formValues, setFormValues] = useState(emptyForm);
 const updateForm = (inputName, inputValue) => {
-  setFormValues({...formValues, [inputName]: inputValue })
+  setFormValues({ ...formValues, [inputName]: inputValue })
 }
-const submitForm = (evt) => {
+const addToTeam = (evt) => {
   const newTeamMember = {
     name: formValues.name.trim(),
     email: formValues.email.trim(),
@@ -29,7 +29,7 @@ const submitForm = (evt) => {
   };
   if (!newTeamMember.name || !newTeamMember.email || !newTeamMember.role) return;
   setTeam(team.concat(newTeamMember));
-  setFormValues(intialTeamValues);
+  setFormValues(emptyForm);
 };
   return (
     <div className="container">
@@ -37,12 +37,16 @@ const submitForm = (evt) => {
       <TeamForm 
       values={formValues}
       update={updateForm}
-      submit={submitForm}
+      add={addToTeam}
       />
-      {team.map((player) => {
-        return <Team key={player.id}
-            details={player}
-            />
+      {team.map((player, idx) => {
+        return (
+        <div key={idx} >
+          <h2>{player.name}</h2>
+          <h4>{player.email}</h4>
+          <h4>{player.role}</h4>
+            </div>
+        );
       })}
       </div>
       );
