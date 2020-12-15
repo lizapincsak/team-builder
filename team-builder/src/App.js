@@ -10,7 +10,7 @@ import TeamForm from './components/TeamForm';
 // ]
 
 const emptyForm = {
-  names: "",
+  name: "",
   email: "",
   role: "",
 }
